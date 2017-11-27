@@ -9,9 +9,7 @@
 ```
 	cd C:\Iguazio
 	mvn clean install dependency:copy-dependencies
-	java -cp "target\lib\*;target\home.assignment.jar" iguazio.home.assignment.BigBang "<<input file>>" "<<output file>>" "<<endpoint1>>" "<<endpoint2>>"
-
-
+	java -cp "target\lib\*;target\home.assignment.jar" iguazio.home.assignment.BigBang "[input file]" "[output file]" "[endpoint1]" "[endpoint2]"
 	For example:
 	java -cp "target\lib\*;target\home.assignment.jar" iguazio.home.assignment.BigBang "c:\users\golaniz\desktop\input.txt" "c:\users\golaniz\desktop\output.txt" "http://localhost:1001" "http://localhost:1002"
 ```
