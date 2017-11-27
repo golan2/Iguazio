@@ -106,7 +106,7 @@ class JobQueueClearance implements AutoCloseable{
 
             }
             else {
-                if (!result.result().isEmpty()) _logger.debug("Writing " + result.result().stream().map(Job::getLine).collect(Collectors.joining(",")));
+                if (!result.result().isEmpty()) _logger.debug("Writing: " + result.result().stream().map(j -> String.valueOf(j.getJobId())).collect(Collectors.joining(",")));
             }
         }
     }

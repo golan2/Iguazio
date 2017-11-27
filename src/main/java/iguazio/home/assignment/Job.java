@@ -9,13 +9,18 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 class Job {
     private static final int RESULTS_SIZE = 2;
+    private static long jobOrdinalIndexer = 0;
 
+    private final long          jobId;      //to show progress in the command line // can be removed if not interesting
     private final String        line;
-    private final AtomicInteger count   = new AtomicInteger();
-    private final String[]      results = new String[RESULTS_SIZE];
+    private final AtomicInteger count;      //how many results we have so far
+    private final String[]      results;
 
     Job(String line) {
-        this.line = line;
+        this.jobId   = ++jobOrdinalIndexer;
+        this.line    = line;
+        this.count   = new AtomicInteger();
+        this.results = new String[RESULTS_SIZE];
     }
 
     void setResult(int index, String result) {
@@ -29,6 +34,10 @@ class Job {
 
     String getLine() {
         return line;
+    }
+
+    long getJobId() {
+        return jobId;
     }
 
     boolean calculateAnswer() {

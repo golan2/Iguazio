@@ -16,9 +16,6 @@ import java.util.stream.Stream;
 /**
  * Everyone Has to Start Somewhere
  *
- * mvn clean install dependency:copy-dependencies
- * java -cp "target\lib\*;target\home.assignment.jar" iguazio.home.assignment.BigBang "c:\users\golaniz\desktop\input.txt" "c:\users\golaniz\desktop\output.txt" "http://localhost:1001" "http://localhost:1002"
- *
  * To activate DEBUG logging add "-Ddebug" to the commandline
  */
 public class BigBang {
@@ -88,6 +85,9 @@ public class BigBang {
                 try {
                     _logger.debug("Queue size=" + queue.size());
                     final Job job = new Job(line);
+                    if (job.getJobId()%100==0) {
+                        _logger.info("Lines processed so far {} ...", job.getJobId());
+                    }
                     queue.put(job);     //here we will block if we reach parallel limit
                     ep1.invokeAsync(job);
                     ep2.invokeAsync(job);

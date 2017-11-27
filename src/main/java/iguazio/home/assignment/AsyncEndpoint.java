@@ -46,12 +46,12 @@ class AsyncEndpoint implements AutoCloseable {
 
                 if (_logger.isDebugEnabled()) {
                     if (job.isReady()) {
-                        _logger.debug("JobReady: {} {}", job.getLine(), (queueClearance.nothingToDo() ? "NothingToDo" : "JobQueueClearance"));
+                        _logger.debug("JobReady: id=[{}] line=[{}] status=[{}]", job.getJobId(), job.getLine(), (queueClearance.shouldTriggerClearance(job) ? "JobQueueClearance" : "NothingToDo"));
                     }
                 }
 
                 //avoid tons of async that will eventually do nothing since the ready job is not first in the queue
-                if (!queueClearance.shouldTriggerClearance(job)) {
+                if (queueClearance.shouldTriggerClearance(job)) {
                     vertx.executeBlocking( queueClearance.getRequestHandler(), queueClearance.getResponseHandler());
                 }
             });
